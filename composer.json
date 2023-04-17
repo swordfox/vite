@@ -17,9 +17,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4 || ^8.0",
-        "silverstripe/framework": "^4.12@dev",
-        "silverstripe/cms": "^4.7@dev",
-        "silverstripe/admin": "^1.7@dev",
+        "silverstripe/framework": "^4",
+        "silverstripe/cms": "^4",
     },
     "require-dev": {
       "silverstripe/recipe-testing": "^2",
@@ -27,7 +26,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Swordfox\\Vite\\": ["src/"]
+            "Swordfox\\Vite\\": "src/"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }
