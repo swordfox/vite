@@ -1,9 +1,0 @@
----
-Name: vite
----
-
-# Swordfox\Vite:
-  # extra_requirements_css:
-  #   - themes/custom/cms/cms.scss
-  # editor_css:
-  #   - themes/custom/cms/wysiwyg.scss
