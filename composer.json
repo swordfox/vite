@@ -1,0 +1,32 @@
+{
+    "name": "swordfox/vite",
+    "description": "Vite Frontend Tooling, Lightning Fast HMR for SilverStripe 4",
+    "type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "vite",
+        "HMR"
+    ],
+    "license": "MIT",
+    "authors": [{
+        "name": "Artem Karasev",
+        "email": "art@swordfox.nz"
+    }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "silverstripe/framework": "^4.12@dev",
+        "silverstripe/cms": "^4.7@dev",
+        "silverstripe/admin": "^1.7@dev",
+    },
+    "require-dev": {
+      "silverstripe/recipe-testing": "^2",
+      "silverstripe/frameworktest": "^0.4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swordfox\\Vite\\": ["src/"]
+        }
+    }
+}

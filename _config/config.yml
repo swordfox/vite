@@ -1,0 +1,7 @@
+---
+Name: vite
+---
+
+Page:
+  extensions:
+    - Swordfox\Vite\Extensions\ViteDataExtension
