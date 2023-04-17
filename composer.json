@@ -1,5 +1,6 @@
 {
     "name": "swordfox/vite",
+    "version": "1.0",
     "description": "Vite Frontend Tooling, Lightning Fast HMR for SilverStripe 4",
     "type": "silverstripe-vendormodule",
     "keywords": [
