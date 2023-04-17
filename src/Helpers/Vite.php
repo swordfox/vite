@@ -5,6 +5,10 @@ namespace Swordfox\Vite\Helpers;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\View\ViewableData;
 use SilverStripe\Core\Environment;
+use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
+use SilverStripe\View\Requirements;
+use SilverStripe\Core\Config\Config;
 
 class Vite extends ViewableData
 {
@@ -51,9 +55,9 @@ class Vite extends ViewableData
         }
     }
 
-    public static function assetLink($path)
+    public static function assetLink($path, $forceBuild = false)
     {
-        if (self::hotAsset()) {
+        if (self::hotAsset() && !$forceBuild) {
             
             return self::hotAsset($path);
         } else {
@@ -99,5 +103,37 @@ class Vite extends ViewableData
         }
 
         return $manifest;
+    }
+
+    public static function adminAssets()
+    {
+        $config = Config::inst()->get('Swordfox\Vite');
+
+        if (isset($config['extra_requirements_css'])) {
+            $reqs = [];
+
+            foreach($config['extra_requirements_css'] as $req) {
+                $reqs[] = self::assetLink($req);
+            }
+
+            LeftAndMain::config()->set('extra_requirements_css', $reqs);
+
+            if (self::hotAsset()) {
+                // LeftAndMain::config()->set('extra_requirements_javascript', [
+                //   Vite::assetLink('@vite/client')
+                // ]);
+                Requirements::insertHeadTags('<script type="module" src="@vite/client"></script>');
+            }
+        }
+
+        if (isset($config['editor_css'])) {
+            $reqs = [];
+
+            foreach($config['editor_css'] as $req) {
+                $reqs[] = self::assetLink($req, true);
+            }
+
+            TinyMCEConfig::config()->set('editor_css', $reqs);
+        }
     }
 }
