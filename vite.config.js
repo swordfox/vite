@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 // import { viteStaticCopy } from 'vite-plugin-static-copy'
 // import copy from 'rollup-plugin-copy';
+import autoprefixer from "autoprefixer";
 
 export default defineConfig({
     plugins: [
@@ -32,7 +33,14 @@ export default defineConfig({
             ],
             refresh: { paths: [
                 'themes/custom/templates/**',
-            ]}
+            ]},
         })
-    ]
+    ],
+    css: {
+        postcss: {
+            plugins: [
+                autoprefixer,
+            ],
+        }
+    },
 });

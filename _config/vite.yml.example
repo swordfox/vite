@@ -3,6 +3,7 @@ Name: vite
 ---
 
 Swordfox\Vite:
+  assetsImageFolder: themes/custom/src/images
   extra_requirements_css:
     - themes/custom/cms/cms.scss
   editor_css:

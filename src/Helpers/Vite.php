@@ -55,6 +55,32 @@ class Vite extends ViewableData
         }
     }
 
+    public static function asset($path)
+    {
+        return self::assetLink($path);
+    }
+
+    public static function image($path)
+    {
+        $config = Config::inst()->get('Swordfox\Vite');
+
+        if (isset($config['assetsImageFolder'])) {
+
+            $dir = $config['assetsImageFolder'];
+
+            if (substr($dir, -1) == '/') {
+                $dir = substr($dir, 0, strlen($dir) - 1);
+            }
+
+            return self::asset($dir . '/' . $path);
+
+        } else {
+
+            return self::asset($path);
+
+        }
+    }
+
     public static function assetLink($path, $forceBuild = false)
     {
         if (self::hotAsset() && !$forceBuild) {
