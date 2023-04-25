@@ -5,3 +5,4 @@ Name: vite-base
 Page:
   extensions:
     - Swordfox\Vite\Extensions\ViteDataExtension
+    - Swordfox\Vite\Extensions\SiteConfigExtension

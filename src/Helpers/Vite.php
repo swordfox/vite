@@ -88,7 +88,7 @@ class Vite extends ViewableData
             return self::hotAsset($path);
         } else {
 
-            return 'build/' . self::manifest($path)['file'];
+            return '/build/' . self::manifest($path)['file'];
         }
     }
 
