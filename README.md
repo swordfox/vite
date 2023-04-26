@@ -114,11 +114,12 @@ In order to add assets in your template .ss files you can use these helpers:
 $Vite.asset('themes/custom/src/images/image.jpg')
 ~~~
 
-or
+or, shortcut if you set `assetsImageFolder` in your `vite.yml` as mentioned above
 
 ~~~html
 $Vite.image('image.jpg')
 ~~~
+
 
 You can also reach vite helper through SiteConfig
 
