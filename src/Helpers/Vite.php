@@ -40,7 +40,10 @@ class Vite extends ViewableData
             <script type="module" src="' . self::hotAsset('@vite/client') . '"></script>';
         } else {
 
-            return '<link rel="modulepreload" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->base . '/build/' . $this->manifest($path)['file'] . '"></script>';
+            if ($this->manifest($path)) {
+
+                return '<link rel="modulepreload" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->base . '/build/' . $this->manifest($path)['file'] . '"></script>';
+            }
         }
     }
 
@@ -51,7 +54,10 @@ class Vite extends ViewableData
             return '<link rel="stylesheet" href="' . self::hotAsset($path) . '" />';
         } else {
 
-            return '<link rel="preload" as="style" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" />';
+            if ($this->manifest($path)) {
+                
+                return '<link rel="preload" as="style" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" />';
+            }
         }
     }
 
@@ -88,7 +94,13 @@ class Vite extends ViewableData
             return self::hotAsset($path);
         } else {
 
-            return '/build/' . self::manifest($path)['file'];
+            if (self::manifest($path)) {
+
+                return 'build/' . self::manifest($path)['file'];
+            } else {
+
+                return null;
+            }
         }
     }
 
@@ -139,7 +151,12 @@ class Vite extends ViewableData
             $reqs = [];
 
             foreach($config['extra_requirements_css'] as $req) {
-                $reqs[] = self::assetLink($req);
+
+                $r = self::assetLink($req);
+
+                if ($r) {
+                    $reqs[] = self::assetLink($req);
+                }
             }
 
             LeftAndMain::config()->set('extra_requirements_css', $reqs);
@@ -156,7 +173,11 @@ class Vite extends ViewableData
             $reqs = [];
 
             foreach($config['editor_css'] as $req) {
-                $reqs[] = self::assetLink($req, true);
+                $r = self::assetLink($req, true);
+
+                if ($r) {
+                    $reqs[] = self::assetLink($req);
+                }
             }
 
             TinyMCEConfig::config()->set('editor_css', $reqs);
