@@ -21,7 +21,7 @@ export default defineConfig({
         // }),
 
         // copy({
-        //   targets: [{ src: 'themes/custom/src/images/*', dest: 'public/build/images' }]
+        //     targets: [{ src: 'themes/custom/src/images/favicon.ico', dest: 'public/' }]
         // }),
 
         laravel({
