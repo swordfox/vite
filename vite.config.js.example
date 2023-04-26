@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import autoprefixer from "autoprefixer";
 // import { viteStaticCopy } from 'vite-plugin-static-copy'
 // import copy from 'rollup-plugin-copy';
-import autoprefixer from "autoprefixer";
 
 export default defineConfig({
     plugins: [
@@ -28,8 +28,8 @@ export default defineConfig({
             input: [
                 'themes/custom/src/app.scss',
                 'themes/custom/src/app.js',
-                'themes/custom/cms/cms.scss',
-                'themes/custom/cms/wysiwyg.scss',
+                // 'themes/custom/cms/cms.scss',
+                // 'themes/custom/cms/wysiwyg.scss',
             ],
             refresh: { paths: [
                 'themes/custom/templates/**',
