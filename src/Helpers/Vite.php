@@ -148,7 +148,7 @@ class Vite extends ViewableData
         $config = Config::inst()->get('Swordfox\Vite');
 
         if (isset($config['extra_requirements_css'])) {
-            $reqs = [];
+            $reqs = LeftAndMain::config()->get('extra_requirements_css');
 
             foreach($config['extra_requirements_css'] as $req) {
 
