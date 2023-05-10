@@ -96,7 +96,7 @@ class Vite extends ViewableData
 
             if (self::manifest($path)) {
 
-                return 'build/' . self::manifest($path)['file'];
+                return '/build/' . self::manifest($path)['file'];
             } else {
 
                 return null;
