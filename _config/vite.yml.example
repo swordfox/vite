@@ -7,4 +7,4 @@ Swordfox\Vite:
   # extra_requirements_css:
   #   - themes/custom/cms/cms.scss
   # editor_css:
-  #   - themes/custom/cms/wysiwyg.scss
+  #   - themes/custom/cms/wysiwyg.scss # currently only for `npm run build`

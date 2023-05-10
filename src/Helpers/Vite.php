@@ -169,18 +169,23 @@ class Vite extends ViewableData
             }
         }
 
-        if (isset($config['editor_css'])) {
-            $reqs = [];
+        // ! the hot file `npm run dev` does not work within tinymce iframe (only production mode supported `npm run build`). Need to find a solution for dev environment) * data of the field is not being saved when css with hot url injected
 
-            foreach($config['editor_css'] as $req) {
-                $r = self::assetLink($req, true);
+        if (!self::hotAsset()) {
 
-                if ($r) {
-                    $reqs[] = self::assetLink($req);
+            if (isset($config['editor_css'])) {
+                $reqs = TinyMCEConfig::config()->get('editor_css');
+
+                foreach($config['editor_css'] as $req) {
+                    $r = self::assetLink($req, true);
+
+                    if ($r) {
+                        $reqs[] = self::assetLink($req);
+                    }
                 }
-            }
 
-            TinyMCEConfig::config()->set('editor_css', $reqs);
+                TinyMCEConfig::config()->set('editor_css', $reqs);
+            }
         }
     }
 }
