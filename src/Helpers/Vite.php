@@ -9,6 +9,7 @@ use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\View\SSViewer;
 
 class Vite extends ViewableData
 {
@@ -31,8 +32,14 @@ class Vite extends ViewableData
         $this->base = Environment::getEnv('SS_BASE_URL');
     }
 
-    public function JS($path = 'themes/custom/src/app.js')
+    public function JS($path = null)
     {
+        if (!$path) {
+
+            $themes = SSViewer::get_themes();
+            $path = 'themes/'.$themes[1].'/src/app.js';
+        }
+
         if (self::hotAsset()) {
 
             return '<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
@@ -47,8 +54,14 @@ class Vite extends ViewableData
         }
     }
 
-    public function CSS($path = 'themes/custom/src/app.scss')
+    public function CSS($path = null)
     {
+        if (!$path) {
+
+            $themes = SSViewer::get_themes();
+            $path = 'themes/'.$themes[1].'/src/app.scss';
+        }
+
         if (self::hotAsset()) {
             
             return '<link rel="stylesheet" href="' . self::hotAsset($path) . '" />';
