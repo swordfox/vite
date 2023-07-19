@@ -73,12 +73,26 @@ npm install
 6. Add APP_URL to your .env with the local address of your website
 
 ```bash
-APP_URL=https://website.lh
+APP_URL=http://localhost
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
 
 ## How To Use
 
-We need to include css in our head tag 
+We need to include css in our head tag
 
 ~~~html
 <head>
