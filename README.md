@@ -45,16 +45,15 @@ We need to set up package.json in our project root folder. Use it for all fronte
 
 ~~~js
     "scripts": {
-        "dev": "vite",
-        "build": "vite build"
+      "dev": "vite",
+      "build": "vite build",
+      "preview": "vite preview"
     },
     "devDependencies": {
-        "axios": "^1.1.2",
-        "laravel-vite-plugin": "^0.7.2",
-        "rollup-plugin-copy": "^3.4.0",
-        "sass": "^1.62.0",
-        "vite": "^4.0.0",
-        "vite-plugin-static-copy": "^0.13.1"
+        "laravel-vite-plugin": "^0.7.8",
+        "sass": "^1.63.6",
+        "vite": "^4.4.0",
+        "vite-plugin-static-copy": "^0.17.0"
     },
 ~~~
 
@@ -73,7 +72,8 @@ npm install
 6. Add APP_URL to your .env with the local address of your website
 
 ```bash
-APP_URL=http://localhost
+APP_URL=https://localhost
+ASSET_URL=https://localhost
 
 PUSHER_APP_ID=
 PUSHER_APP_KEY=

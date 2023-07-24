@@ -2,9 +2,21 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import autoprefixer from "autoprefixer";
 // import { viteStaticCopy } from 'vite-plugin-static-copy'
-// import copy from 'rollup-plugin-copy';
+import fs from 'fs';
+
+const host = 'silverstripe-starter.lh';
 
 export default defineConfig({
+
+    server: {
+        host,
+        hmr: { host },
+        https: {
+            key: fs.readFileSync(`/pathtossl/certs/${host}.key`),
+            cert: fs.readFileSync(`/pathtossl/certs/${host}.crt`),
+        },
+    },
+
     plugins: [
 
         // viteStaticCopy({
@@ -18,10 +30,6 @@ export default defineConfig({
         //     //   dest: './public/fonts'
         //     // }
         //   ]
-        // }),
-
-        // copy({
-        //     targets: [{ src: 'themes/custom/src/images/favicon.ico', dest: 'public/' }]
         // }),
 
         laravel({
