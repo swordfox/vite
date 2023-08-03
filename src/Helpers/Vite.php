@@ -22,14 +22,14 @@ class Vite extends ViewableData
      */
     public static $hotFile = './hot';
 
-    public static $base;
+    public static $viteBase;
 
     public function __construct()
     {
         parent::__construct();
         $config = self::config();
 
-        $this->base = Environment::getEnv('SS_BASE_URL');
+        $this->viteBase = Environment::getEnv('SS_BASE_URL');
     }
 
     public function JS($path = null)
@@ -49,7 +49,7 @@ class Vite extends ViewableData
 
             if ($this->manifest($path)) {
 
-                return '<link rel="modulepreload" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->base . '/build/' . $this->manifest($path)['file'] . '"></script>';
+                return '<link rel="modulepreload" href="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '"></script>';
             }
         }
     }
@@ -63,13 +63,13 @@ class Vite extends ViewableData
         }
 
         if (self::hotAsset()) {
-            
+
             return '<link rel="stylesheet" href="' . self::hotAsset($path) . '" />';
         } else {
 
             if ($this->manifest($path)) {
-                
-                return '<link rel="preload" as="style" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->base . '/build/' . $this->manifest($path)['file'] . '" />';
+
+                return '<link rel="preload" as="style" href="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '" />';
             }
         }
     }
@@ -103,7 +103,7 @@ class Vite extends ViewableData
     public static function assetLink($path, $forceBuild = false)
     {
         if (self::hotAsset() && !$forceBuild) {
-            
+
             return self::hotAsset($path);
         } else {
 
@@ -125,7 +125,7 @@ class Vite extends ViewableData
     public static function hotAsset($asset = null)
     {
         if (file_exists(self::$hotFile)) {
-            
+
             return rtrim(file_get_contents(self::$hotFile)) . ($asset ? ('/' . $asset) : '');
         } else {
 
