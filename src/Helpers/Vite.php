@@ -20,16 +20,13 @@ class Vite extends ViewableData
      *
      * @var string|null
      */
-    public static $hotFile = './hot';
-
-    public static $viteBase;
+    private static $hotFile = './hot';
 
     public function __construct()
     {
         parent::__construct();
-        $config = self::config();
 
-        $this->viteBase = Environment::getEnv('SS_BASE_URL');
+        $config = self::config();
     }
 
     public function JS($path = null)
@@ -49,7 +46,7 @@ class Vite extends ViewableData
 
             if ($this->manifest($path)) {
 
-                return '<link rel="modulepreload" href="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '"></script>';
+                return '<link rel="modulepreload" href="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '"></script>';
             }
         }
     }
@@ -69,7 +66,7 @@ class Vite extends ViewableData
 
             if ($this->manifest($path)) {
 
-                return '<link rel="preload" as="style" href="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->viteBase . '/build/' . $this->manifest($path)['file'] . '" />';
+                return '<link rel="preload" as="style" href="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '" />';
             }
         }
     }
@@ -200,5 +197,10 @@ class Vite extends ViewableData
                 TinyMCEConfig::config()->set('editor_css', $reqs);
             }
         }
+    }
+
+    private function getBase()
+    {
+        return Environment::getEnv('SS_BASE_URL');
     }
 }
