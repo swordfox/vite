@@ -21,6 +21,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 composer require swordfox/vite
 ```
 
+
 2. Copy vite yml config
 
 ```bash
@@ -31,6 +32,7 @@ Make sure to set the path to images folder of your theme `assetsImageFolder`
 
 You can also use `extra_requirements_css`, `editor_css` as shown in the config, in order to apply custom css to admin environment through Vite
 
+
 3. Copy vite config
 
 ```bash
@@ -38,6 +40,7 @@ cp vendor/swordfox/vite/vite.config.js.example vite.config.js
 ```
 
 You might need to update paths to your assets in vite.config.js, eg.: `themes/custom/src/app.scss`
+
 
 4. Prepare package.json
 
@@ -63,11 +66,13 @@ or run the command to copy example package.json from the source folder to start 
 cp vendor/swordfox/vite/package.json.example package.json
 ```
 
+
 5. Finally, run
 
 ```bash
 npm install
 ```
+
 
 6. Add APP_URL to your .env with the local address of your website
 
