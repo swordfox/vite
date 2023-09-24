@@ -18,6 +18,7 @@ export default defineConfig({
             refresh: { paths: [
                 'themes/yourtheme/templates/**',
             ]},
+            // postcss: [autoprefixer()],
         })
     ],
 

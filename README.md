@@ -41,23 +41,23 @@ You might need to update paths to your assets in vite.config.js, eg.: `themes/cu
 
 4. Prepare package.json
 
-We need to set up package.json in our project root folder. Use it for all frontend packages. If you have one, make sure to include npm scripts and dependencies as follows:
+We need to set up package.json in our project root folder. Use it for all frontend packages. If you have one, make sure to include npm scripts follows:
 
-~~~js
-    "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview"
-    },
-    "devDependencies": {
-        "laravel-vite-plugin": "^0.7.8",
-        "sass": "^1.63.6",
-        "vite": "^4.4.0",
-        "vite-plugin-static-copy": "^0.17.0"
-    },
-~~~
+```
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+```
 
-Otherwise, run the command to copy one from the source folder to start from
+and install necessary packages:
+
+```
+npm install laravel-vite-plugin autoprefixer@latest sass --save-dev
+```
+
+or run the command to copy example package.json from the source folder to start with
 
 ```bash
 cp vendor/swordfox/vite/package.json.example package.json
