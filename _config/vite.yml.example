@@ -3,8 +3,8 @@ Name: vite
 ---
 
 Swordfox\Vite:
-  assetsImageFolder: themes/custom/src/images
+  assetsImageFolder: themes/yourtheme/src/images
   # extra_requirements_css:
-  #   - themes/custom/cms/cms.scss
+  #   - themes/yourtheme/cms/cms.scss
   # editor_css:
-  #   - themes/custom/cms/wysiwyg.scss # currently only for `npm run build`
+  #   - themes/yourtheme/cms/wysiwyg.scss # currently only for `npm run build`

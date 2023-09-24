@@ -72,8 +72,9 @@ npm install
 6. Add APP_URL to your .env with the local address of your website
 
 ```bash
-APP_URL=https://localhost
-ASSET_URL=https://localhost
+APP_URL=//mywebsite.com
+ASSET_URL=${APP_URL}
+SS_BASE_URL=${APP_URL}
 
 PUSHER_APP_ID=
 PUSHER_APP_KEY=
@@ -140,6 +141,12 @@ You can also reach vite helper through SiteConfig
 ~~~html
 $SiteConfig.Vite.image('image.jpg')
 ~~~
+
+Don't forget to update your .gitignore by adding these
+```
+/public/hot
+/public/build/
+```
 
 
 You are all set now, enjoy.

@@ -1,0 +1,53 @@
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import autoprefixer from "autoprefixer";
+// import { viteStaticCopy } from 'vite-plugin-static-copy'
+// import copy from 'rollup-plugin-copy';
+
+export default defineConfig({
+
+    build: {
+        emptyOutDir: true,
+    },
+
+    plugins: [
+
+        // viteStaticCopy({
+        //   targets: [
+        //     {
+        //       src: 'themes/yourtheme/src/images/*',
+        //       dest: 'public/images',
+        //     },
+        //     // {
+        //     //   src: path.resolve(__dirname, 'themes/yourtheme/src/fonts/*'),
+        //     //   dest: './public/fonts'
+        //     // }
+        //   ]
+        // }),
+
+        // copy({
+        //   targets: [
+        //     { src: 'themes/yourtheme/src/images/favicon.ico', dest: 'public/' },
+        //   ],
+        // }),
+
+        laravel({
+            input: [
+                'themes/yourtheme/src/app.scss',
+                'themes/yourtheme/src/app.js',
+                // 'themes/yourtheme/cms/cms.scss',
+                // 'themes/yourtheme/cms/wysiwyg.scss',
+            ],
+            refresh: { paths: [
+                'themes/yourtheme/templates/**',
+            ]},
+        })
+    ],
+    css: {
+        postcss: {
+            plugins: [
+                autoprefixer,
+            ],
+        }
+    },
+});
