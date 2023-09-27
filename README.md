@@ -147,11 +147,19 @@ You can also reach vite helper through SiteConfig
 $SiteConfig.Vite.image('image.jpg')
 ~~~
 
+Make sure to include glob import that will handle assets on `npm run build`. To do so, add this at the very top of your main js file. You might need to update paths or include other assets that are involved in your own build.
+
+```
+import.meta.glob([
+  './images/**',
+  './fonts/**',
+]);
+```
+
 Don't forget to update your .gitignore by adding these
 ```
 /public/hot
 /public/build/
 ```
-
 
 You are all set now, enjoy.
