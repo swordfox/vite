@@ -1,49 +1,27 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import autoprefixer from "autoprefixer";
-// import { viteStaticCopy } from 'vite-plugin-static-copy'
-import fs from 'fs';
-
-const host = 'silverstripe-starter.lh';
 
 export default defineConfig({
 
-    server: {
-        host,
-        hmr: { host },
-        https: {
-            key: fs.readFileSync(`/pathtossl/certs/${host}.key`),
-            cert: fs.readFileSync(`/pathtossl/certs/${host}.crt`),
-        },
+    build: {
+        emptyOutDir: true,
     },
 
     plugins: [
 
-        // viteStaticCopy({
-        //   targets: [
-        //     {
-        //       src: 'themes/custom/src/images/*',
-        //       dest: 'public/images',
-        //     },
-        //     // {
-        //     //   src: path.resolve(__dirname, 'themes/custom/src/fonts/*'),
-        //     //   dest: './public/fonts'
-        //     // }
-        //   ]
-        // }),
-
         laravel({
             input: [
-                'themes/custom/src/app.scss',
-                'themes/custom/src/app.js',
-                // 'themes/custom/cms/cms.scss',
-                // 'themes/custom/cms/wysiwyg.scss',
+                'themes/yourtheme/src/app.scss',
+                'themes/yourtheme/src/app.js',
             ],
             refresh: { paths: [
-                'themes/custom/templates/**',
+                'themes/yourtheme/templates/**',
             ]},
+            // postcss: [autoprefixer()],
         })
     ],
+
     css: {
         postcss: {
             plugins: [
@@ -51,4 +29,5 @@ export default defineConfig({
             ],
         }
     },
+
 });

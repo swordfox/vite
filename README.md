@@ -21,6 +21,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 composer require swordfox/vite
 ```
 
+
 2. Copy vite yml config
 
 ```bash
@@ -31,6 +32,7 @@ Make sure to set the path to images folder of your theme `assetsImageFolder`
 
 You can also use `extra_requirements_css`, `editor_css` as shown in the config, in order to apply custom css to admin environment through Vite
 
+
 3. Copy vite config
 
 ```bash
@@ -39,29 +41,31 @@ cp vendor/swordfox/vite/vite.config.js.example vite.config.js
 
 You might need to update paths to your assets in vite.config.js, eg.: `themes/custom/src/app.scss`
 
+
 4. Prepare package.json
 
-We need to set up package.json in our project root folder. Use it for all frontend packages. If you have one, make sure to include npm scripts and dependencies as follows:
+We need to set up package.json in our project root folder. Use it for all frontend packages. If you have one, make sure to include npm scripts follows:
 
-~~~js
-    "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview"
-    },
-    "devDependencies": {
-        "laravel-vite-plugin": "^0.7.8",
-        "sass": "^1.63.6",
-        "vite": "^4.4.0",
-        "vite-plugin-static-copy": "^0.17.0"
-    },
-~~~
+```
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+```
 
-Otherwise, run the command to copy one from the source folder to start from
+and install necessary packages:
+
+```
+npm install laravel-vite-plugin autoprefixer@latest sass --save-dev
+```
+
+or run the command to copy example package.json from the source folder to start with
 
 ```bash
 cp vendor/swordfox/vite/package.json.example package.json
 ```
+
 
 5. Finally, run
 
@@ -69,11 +73,13 @@ cp vendor/swordfox/vite/package.json.example package.json
 npm install
 ```
 
+
 6. Add APP_URL to your .env with the local address of your website
 
 ```bash
-APP_URL=https://localhost
-ASSET_URL=https://localhost
+APP_URL=//mywebsite.com
+ASSET_URL=${APP_URL}
+SS_BASE_URL=${APP_URL}
 
 PUSHER_APP_ID=
 PUSHER_APP_KEY=
@@ -141,5 +147,19 @@ You can also reach vite helper through SiteConfig
 $SiteConfig.Vite.image('image.jpg')
 ~~~
 
+Make sure to include glob import that will handle assets on `npm run build`. To do so, add this at the very top of your main js file. You might need to update paths or include other assets that are involved in your own build.
+
+```
+import.meta.glob([
+  './images/**',
+  './fonts/**',
+]);
+```
+
+Don't forget to update your .gitignore by adding these
+```
+/public/hot
+/public/build/
+```
 
 You are all set now, enjoy.

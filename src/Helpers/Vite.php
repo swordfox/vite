@@ -41,7 +41,7 @@ class Vite extends ViewableData
 
             return '<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
             <script type="module" src="' . self::hotAsset($path) . '"></script>
-            <script type="module" src="' . self::hotAsset('@vite/client') . '"></script>';
+            ';
         } else {
 
             if ($this->manifest($path)) {
@@ -61,7 +61,8 @@ class Vite extends ViewableData
 
         if (self::hotAsset()) {
 
-            return '<link rel="stylesheet" href="' . self::hotAsset($path) . '" />';
+            return '<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
+            <link rel="stylesheet" href="' . self::hotAsset($path) . '" />';
         } else {
 
             if ($this->manifest($path)) {
