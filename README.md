@@ -78,6 +78,7 @@ npm install
 
 ```bash
 APP_URL=//mywebsite.com
+# APP_URL_CDN="//cdn.mywebsite.com"
 ASSET_URL=${APP_URL}
 SS_BASE_URL=${APP_URL}
 

@@ -93,7 +93,7 @@ class Vite extends ViewableData
 
         } else {
 
-            return self::asset($path);
+            return Environment::getEnv('APP_URL_CDN') . self::asset($path);
 
         }
     }
@@ -107,7 +107,7 @@ class Vite extends ViewableData
 
             if (self::manifest($path)) {
 
-                return '/build/' . self::manifest($path)['file'];
+                return Environment::getEnv('APP_URL_CDN') . '/build/' . self::manifest($path)['file'];
             } else {
 
                 return null;
@@ -202,6 +202,6 @@ class Vite extends ViewableData
 
     private function getBase()
     {
-        return Environment::getEnv('SS_BASE_URL');
+        return Environment::getEnv('APP_URL_CDN') ?? Environment::getEnv('SS_BASE_URL');
     }
 }
