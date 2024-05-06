@@ -4,6 +4,7 @@ Name: vite
 
 Swordfox\Vite:
   assetsImageFolder: themes/yourtheme/src/images
+  # buildPath: my-custom-path/build
   # extra_requirements_css:
   #   - themes/yourtheme/cms/cms.scss
   # editor_css:

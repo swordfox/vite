@@ -46,7 +46,7 @@ class Vite extends ViewableData
 
             if ($this->manifest($path)) {
 
-                return '<link rel="modulepreload" href="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '"></script>';
+                return '<link rel="modulepreload" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '"></script>';
             }
         }
     }
@@ -67,7 +67,7 @@ class Vite extends ViewableData
 
             if ($this->manifest($path)) {
 
-                return '<link rel="preload" as="style" href="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->getBase() . '/build/' . $this->manifest($path)['file'] . '" />';
+                return '<link rel="preload" as="style" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" />';
             }
         }
     }
@@ -107,7 +107,7 @@ class Vite extends ViewableData
 
             if (self::manifest($path)) {
 
-                return Environment::getEnv('APP_URL_CDN') . '/build/' . self::manifest($path)['file'];
+                return Environment::getEnv('APP_URL_CDN') . '/' . self::buildPath() . '/' . self::manifest($path)['file'];
             } else {
 
                 return null;
@@ -140,7 +140,7 @@ class Vite extends ViewableData
     {
         $manifest = null;
 
-        $manifestPath = './build/manifest.json';
+        $manifestPath = './' . self::buildPath() . '/manifest.json';
 
         if (is_file($manifestPath)) {
 
@@ -198,6 +198,30 @@ class Vite extends ViewableData
                 TinyMCEConfig::config()->set('editor_css', $reqs);
             }
         }
+    }
+
+    public static function buildPath()
+    {
+        $config = Config::inst()->get('Swordfox\Vite');
+
+        if (isset($config['buildPath'])) {
+
+          $buildPath = $config['buildPath'];
+
+          // safely remove slash at the start if exists
+          if (substr($buildPath, 0, 1) == '/') {
+              $buildPath = substr($buildPath, 1);
+          }
+
+          // safely remove slash at the end if exists
+          if (substr($buildPath, strlen($buildPath) - 1) == '/') {
+              $buildPath = substr($buildPath, 0, strlen($buildPath) - 1);
+          }
+        } else {
+          $buildPath = 'build';
+        }
+
+        return $buildPath;
     }
 
     private function getBase()
