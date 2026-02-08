@@ -18,7 +18,7 @@
   "prefer-stable": true,
   "require": {
     "php": "^7.4 || ^8.0",
-    "silverstripe/framework": "^46",
+    "silverstripe/framework": "^6",
     "silverstripe/cms": "^6"
   },
   "autoload": {
