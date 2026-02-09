@@ -3,15 +3,16 @@
 namespace Swordfox\Vite\Helpers;
 
 use SilverStripe\Core\Config\Configurable;
-use SilverStripe\View\ViewableData;
 use SilverStripe\Core\Environment;
 use SilverStripe\Admin\LeftAndMain;
-use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
+use SilverStripe\TinyMCE\TinyMCEConfig;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Model\ModelData;
+use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\View\SSViewer;
 
-class Vite extends ViewableData
+class Vite extends ModelData
 {
     use Configurable;
 
@@ -39,14 +40,13 @@ class Vite extends ViewableData
 
         if (self::hotAsset()) {
 
-            return '<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
-            <script type="module" src="' . self::hotAsset($path) . '"></script>
-            ';
+            return $this->writeHTML('<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
+            <script type="module" src="' . self::hotAsset($path) . '"></script>');
         } else {
 
             if ($this->manifest($path)) {
 
-                return '<link rel="modulepreload" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '"></script>';
+                return $this->writeHTML('<link rel="modulepreload" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" /><script type="module" src="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '"></script>');
             }
         }
     }
@@ -61,13 +61,13 @@ class Vite extends ViewableData
 
         if (self::hotAsset()) {
 
-            return '<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
-            <link rel="stylesheet" href="' . self::hotAsset($path) . '" />';
+            return $this->writeHTML('<script type="module" src="' . self::hotAsset('@vite/client') . '"></script>
+            <link rel="stylesheet" href="' . self::hotAsset($path) . '" />');
         } else {
 
             if ($this->manifest($path)) {
 
-                return '<link rel="preload" as="style" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" />';
+                return $this->writeHTML('<link rel="preload" as="style" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" /><link rel="stylesheet" href="' . $this->getBase() . '/' . self::buildPath() . '/' . $this->manifest($path)['file'] . '" />');
             }
         }
     }
@@ -227,5 +227,10 @@ class Vite extends ViewableData
     private function getBase()
     {
         return Environment::getEnv('APP_URL_CDN') ?? Environment::getEnv('SS_BASE_URL');
+    }
+
+    private function writeHTML($html)
+    {
+        return DBField::create_field('HTMLFragment', $html);
     }
 }

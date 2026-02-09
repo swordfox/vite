@@ -104,7 +104,7 @@ We need to include css in our head tag
 ~~~html
 <head>
   ...
-  $Vite.CSS.RAW
+  $Vite.CSS
 </head>
 ~~~
 
@@ -113,7 +113,7 @@ The same goes with js requirements, but it can be included in body tag instead, 
 ~~~html
 <body>
   ...
-  $Vite.JS.RAW
+  $Vite.JS
 </body>
 ~~~
 
